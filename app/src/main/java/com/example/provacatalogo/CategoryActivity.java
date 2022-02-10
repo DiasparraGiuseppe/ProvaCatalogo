@@ -54,11 +54,21 @@ public class CategoryActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int i=0;
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    if(i==2){
+
+                    if(i== dataSnapshot.getChildrenCount()-1){
                         break;
                     }
                     i++;
-                  // Plate plate = snapshot.getValue(Plate.class);
+
+                    /*dataSnapshot-> quello che legge dal db a partire dall'ultimo child messo a riga 42
+                     snapshot-> le informazioni di ciascun child letto a partire da dataSnapshotm, quindi un livello più "dentro"
+
+                     occorre leggere gli snapshot fino al penultimo, perché l'ultimo sarebbe img della categoria che se viene letta da problemi perché
+                     non combacia con cioè che si aspetta, cioè Plate
+
+                     Guarda DB se non è chiaro
+                     */
+
 
 
                     // FUNZIONA CON child("catprova").child("GUNKAN").child("G1"); e con dataSnapshot qua sotto

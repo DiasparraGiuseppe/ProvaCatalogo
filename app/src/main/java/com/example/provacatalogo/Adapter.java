@@ -1,5 +1,6 @@
 package com.example.provacatalogo;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -34,7 +35,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull myViewHolder holder, @SuppressLint("RecyclerView") int position) {
         //holder.textView.setText(titles.get(position));
         //holder.imageView.setImageResource(pic.get(position));
         //holder.imageView=pic.get(position);
@@ -44,6 +45,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
              @Override
              public void onClick(View view) {
                  Intent intent =new Intent(context,CategoryActivity.class);
+                 intent.putExtra("CategoryKey",Integer.valueOf(position));       //ricordati di fare get extra
                  context.startActivity(intent);
              }
          });

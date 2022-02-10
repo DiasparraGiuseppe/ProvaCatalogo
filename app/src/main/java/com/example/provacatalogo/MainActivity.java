@@ -39,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = null;
     private RecyclerView recyclerView;
-   // private List<Integer> pic;
-    private List<String> titles;
+    private List<ImageView> pic;
+   // private List<String> titles;
     private Adapter adapter;
+    ImageView imageView;
 
    /* FirebaseRecyclerOptions<Category> options_cat;
     FirebaseRecyclerAdapter<Category, ViewHolderCategory> adapter_cat;*/
@@ -54,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycleview);
         dataref= FirebaseDatabase.getInstance().getReference().child("categoriesprova");
-         titles = new ArrayList<>();
-        //pic = new ArrayList<>();
-        adapter = new Adapter(this, titles);
+         //titles = new ArrayList<>();
+        pic = new ArrayList<ImageView>();
+        adapter = new Adapter(this, pic);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Metti nome ristorante");
@@ -66,13 +67,13 @@ public class MainActivity extends AppCompatActivity {
         dataref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-              /* String value = dataSnapshot.getValue(String.class);
-                titles.add(value);*/
-                int i=0;
 
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                  for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    String link =snapshot.getValue(String.class);
+                    Picasso.get().load(link).into(imageView);
+                    pic.add(imageView);
 
-                    titles.add(snapshot.getValue().toString());
+                    //titles.add(snapshot.getValue().toString());
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -98,9 +99,4 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-
-
 }
-
-
-

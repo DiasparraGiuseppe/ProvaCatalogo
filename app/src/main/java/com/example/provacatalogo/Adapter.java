@@ -10,17 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 
     private Context context;
     //private List<String> titles;
-    private List<ImageView> pic;
+    private List<String> categories;
 
-    public  Adapter(Context context, List<ImageView> pic){
+    public  Adapter(Context context, List<String> categories){
         this.context =context;
-        this.pic = pic;
+        this.categories = categories;
       // this.titles=titles;
     }
     @NonNull
@@ -34,13 +36,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         //holder.textView.setText(titles.get(position));
         //holder.imageView.setImageResource(pic.get(position));
-        holder.imageView=pic.get(position);
+        //holder.imageView=pic.get(position);
+
+        Picasso.get().load(categories.get(position)).into(holder.imageView);
                 /*pic.get(position);*/
     }
 
     @Override
     public int getItemCount() {
-        return pic.size();
+        return categories.size();
         //return titles.size();
     }
 

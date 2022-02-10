@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recycleview);
-        dataref= FirebaseDatabase.getInstance().getReference().child("Categories");
+        dataref= FirebaseDatabase.getInstance().getReference().child("categoriesprova");
          titles = new ArrayList<>();
         //pic = new ArrayList<>();
         adapter = new Adapter(this, titles);
@@ -62,21 +62,27 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setTitle("Metti nome ristorante");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        ValueEventListener postListener = new ValueEventListener() {
+
+        dataref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                titles.add(dataSnapshot.getValue(String.class));
-                // ..
+              /* String value = dataSnapshot.getValue(String.class);
+                titles.add(value);*/
+                int i=0;
+
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+
+                    titles.add(snapshot.getValue().toString());
+                }
+                adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                //Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                //Log.w(TAG, "Failed to read value.", error.toException());
             }
-        };
-        dataref.addValueEventListener(postListener);
+        });
 
             //loadData("");
 

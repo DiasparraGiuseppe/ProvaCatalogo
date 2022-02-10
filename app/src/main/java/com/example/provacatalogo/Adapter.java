@@ -1,6 +1,7 @@
 package com.example.provacatalogo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         //holder.imageView=pic.get(position);
 
         Picasso.get().load(categories.get(position)).into(holder.imageView);
-                /*pic.get(position);*/
+         holder.imageView.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 Intent intent =new Intent(context,CategoryActivity.class);
+                 context.startActivity(intent);
+             }
+         });
     }
 
     @Override

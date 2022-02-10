@@ -28,9 +28,6 @@ public class MainActivity extends AppCompatActivity {
    // private List<String> titles;
     private Adapter adapter;
     ImageView imageView;
-
-   /* FirebaseRecyclerOptions<Category> options_cat;
-    FirebaseRecyclerAdapter<Category, ViewHolderCategory> adapter_cat;*/
     DatabaseReference dataref;
 
     @Override
@@ -48,12 +45,9 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setTitle("Metti nome ristorante");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-
         dataref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                
                  for (DataSnapshot snapshot: dataSnapshot.getChildren()){
                    // String link =snapshot.getValue(String.class);
                       Category cat= snapshot.getValue(Category.class);
@@ -68,16 +62,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                //Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
-            //loadData("");
-
-       /* pic.add(R.drawable.nigiri);
-        pic.add(R.drawable.nigiri);
-        pic.add(R.drawable.nigiri);
-        pic.add(R.drawable.nigiri);*/
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2 , LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);

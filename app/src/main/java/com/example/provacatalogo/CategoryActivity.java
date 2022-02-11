@@ -34,12 +34,12 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categoria);
 
-       /* Intent intent = getIntent();
+        Intent intent = getIntent();
         String CategoryKey = intent.getStringExtra("CategoryKey");
-        String nameConverted= convertToName(CategoryKey);*/
+        String nameConverted= convertToName(CategoryKey);
 
         recyclerView_plates = findViewById(R.id.recycleview_plates);
-        dataref_plates= FirebaseDatabase.getInstance().getReference().child("catprova").child("GUNKAN");
+        dataref_plates= FirebaseDatabase.getInstance().getReference().child("catprova").child(nameConverted);
         platesName= new ArrayList<String>();
         platesImg= new ArrayList<String>();
         adapter_plates = new Adapter_Plates(this,platesName,platesImg);
@@ -96,7 +96,7 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private String convertToName(String categoryKey) {
-        if(Integer.parseInt(categoryKey)==1){
+        if(categoryKey.equals("1")){
             return "NIGIRI";
         }else return "GUNKAN";
     }

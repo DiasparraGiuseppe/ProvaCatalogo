@@ -45,7 +45,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
              @Override
              public void onClick(View view) {
                  Intent intent =new Intent(context,CategoryActivity.class);
-                 intent.putExtra("CategoryKey",Integer.valueOf(position));       //ricordati di fare get extra
+                 intent.putExtra("CategoryKey",Integer.toString(position));       //ricordati di fare get extra
                  context.startActivity(intent);
              }
          });

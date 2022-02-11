@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CategoryActivity"
-    android:background="#FF5F52">
+    android:background="@color/primaryColor">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleview_plates"

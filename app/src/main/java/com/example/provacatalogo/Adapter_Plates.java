@@ -21,11 +21,13 @@ public class Adapter_Plates extends RecyclerView.Adapter<Adapter_Plates.myViewHo
     private Context context;
     private List<String> platesName;
     private List<String> platesImg;
+    private List<String> platesDescription;
 
-    public  Adapter_Plates(Context context, List<String> platesName,List<String> platesImg){
+    public  Adapter_Plates(Context context, List<String> platesName,List<String> platesImg, List<String> platesDescription){
         this.context =context;
         this.platesName = platesName;
         this.platesImg = platesImg;
+        this.platesDescription=platesDescription;
     }
     @NonNull
     @Override
@@ -37,6 +39,7 @@ public class Adapter_Plates extends RecyclerView.Adapter<Adapter_Plates.myViewHo
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.textView_plate.setText(platesName.get(position));
+        holder.textView_plate_description.setText(platesDescription.get(position));
         //holder.imageView.setImageResource(pic.get(position));
         //holder.imageView=pic.get(position);
 
@@ -64,11 +67,13 @@ public class Adapter_Plates extends RecyclerView.Adapter<Adapter_Plates.myViewHo
 
         ImageView imageView_plate;
         TextView textView_plate;
+        TextView textView_plate_description;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView_plate = itemView.findViewById(R.id.imageView_plate);
             textView_plate = itemView.findViewById(R.id.textView_plate);
+            textView_plate_description= itemView.findViewById(R.id.textView_plate_description);
         }
     }
 }

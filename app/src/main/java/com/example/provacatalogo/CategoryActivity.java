@@ -25,6 +25,7 @@ public class CategoryActivity extends AppCompatActivity {
     private RecyclerView recyclerView_plates;
     private List<String> platesName;
     private List<String> platesImg;
+    private List<String> platesDescription;
     private Adapter_Plates adapter_plates;
     ImageView imageView_plates;
     DatabaseReference dataref_plates;
@@ -42,10 +43,11 @@ public class CategoryActivity extends AppCompatActivity {
         dataref_plates= FirebaseDatabase.getInstance().getReference().child("catprova").child(nameConverted);
         platesName= new ArrayList<String>();
         platesImg= new ArrayList<String>();
-        adapter_plates = new Adapter_Plates(this,platesName,platesImg);
+        platesDescription= new ArrayList<String>();
+        adapter_plates = new Adapter_Plates(this,platesName,platesImg,platesDescription);
 
         ActionBar actionBar = getSupportActionBar();
-       // actionBar.setTitle(nameConverted);
+        actionBar.setTitle(nameConverted);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
 
@@ -77,6 +79,7 @@ public class CategoryActivity extends AppCompatActivity {
                     Plate plate = snapshot.getValue(Plate.class);
                     platesImg.add(plate.img);
                     platesName.add(plate.nome);
+                    platesDescription.add(plate.descrizione);
                 }
                 adapter_plates.notifyDataSetChanged();
             }
@@ -87,7 +90,7 @@ public class CategoryActivity extends AppCompatActivity {
             }
         });
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2 , LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1 , LinearLayoutManager.VERTICAL, false);
         recyclerView_plates.setLayoutManager(gridLayoutManager);
         recyclerView_plates.setHasFixedSize(true);
 
@@ -100,8 +103,5 @@ public class CategoryActivity extends AppCompatActivity {
             return "NIGIRI";
         }else return "GUNKAN";
     }
-
-
-
 
 }
